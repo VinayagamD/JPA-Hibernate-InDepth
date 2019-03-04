@@ -105,7 +105,7 @@ public class CourseRepositoryImp implements CourseRepository {
 		
 		course1.setName("Web Service in 100 Steps-Updated");
 		course2.setName("Angular JS in 100 Steps-Updated");
-		em.refresh(course1);
-		em.flush();
+		em.refresh(course1); // Pulls a data from table hence no update happens
+		em.flush(); // Here flush only update course 2
 	}
 }
