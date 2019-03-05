@@ -97,15 +97,26 @@ public class CourseRepositoryImp implements CourseRepository {
 		 * em.flush(); course2.setName("Angular JS in 100 Steps-Updated"); em.flush();
 		 */
 		/*Refresh*/
-		Course course1 = new Course("Web Service in 100 Steps"); 
+		/*
+		 * Course course1 = new Course("Web Service in 100 Steps"); em.persist(course1);
+		 * Course course2 = new Course("Angular JS in 100 Steps"); em.persist(course2);
+		 * em.flush(); // Flush -> commits the code to the database without any delay
+		 * 
+		 * course1.setName("Web Service in 100 Steps-Updated");
+		 * course2.setName("Angular JS in 100 Steps-Updated"); em.refresh(course1); //
+		 * Pulls a data from table hence no update happens em.flush(); // Here flush
+		 * only update course 2
+		 */
+		/*Test Nullable */
+		/*
+		 * Course course1 = new Course("Web Service in 100 Steps");
+		 * course1.setName(null); em.persist(course1); em.flush();
+		 */
+		// Condition 2
+		Course course1 = new Course("Web Service in 100 Steps");
 		em.persist(course1);
-		Course course2 = new Course("Angular JS in 100 Steps"); 
-		em.persist(course2);
-		em.flush(); // Flush -> commits the code to the database without any delay
+		course1.setName(null);
+		em.flush();
 		
-		course1.setName("Web Service in 100 Steps-Updated");
-		course2.setName("Angular JS in 100 Steps-Updated");
-		em.refresh(course1); // Pulls a data from table hence no update happens
-		em.flush(); // Here flush only update course 2
 	}
 }
