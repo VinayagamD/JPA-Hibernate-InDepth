@@ -1,7 +1,7 @@
 insert into 
 	course
-		(id, name) 
+		(id, name, created_date, last_updated_date) 
 	values
-		(10001, 'JPA in 50 steps'),
-		(10002, 'Spring in 50 Steps'),
-		(10003, 'Spring Boot in 100 Steps');
+		(10001, 'JPA in 50 steps', sysdate(),  sysdate()),
+		(10002, 'Spring in 50 Steps', sysdate(),  sysdate()),
+		(10003, 'Spring Boot in 100 Steps', sysdate(),  sysdate());

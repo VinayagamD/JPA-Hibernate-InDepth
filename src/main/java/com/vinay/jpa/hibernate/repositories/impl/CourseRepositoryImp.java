@@ -115,8 +115,10 @@ public class CourseRepositoryImp implements CourseRepository {
 		// Condition 2
 		Course course1 = new Course("Web Service in 100 Steps");
 		em.persist(course1);
-		course1.setName(null);
-		em.flush();
+//		course1.setName(null); -> Line will cause exception due to nullable false
+		Course course2 = findById(10001L);
+//		em.flush();
+		course2.setName("JPA in 50 Steps - Updated");
 		
 	}
 }

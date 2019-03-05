@@ -38,6 +38,13 @@ public class JPQLTest {
 	}
 	
 	@Test
+	public void jpql_Typed_named_query() {
+		TypedQuery<Course> query = em.createNamedQuery("query_get_all_course",Course.class);
+		List<Course> resultList = query.getResultList();
+		logger.info("SELECT c FROM Course c -> {}",resultList);
+	}
+	
+	@Test
 	public void jpql_where() {
 		TypedQuery<Course> query = em.createQuery("SELECT c FROM Course c WHERE name LIKE '%100 Steps'",Course.class);
 		List<Course> resultList = query.getResultList();
