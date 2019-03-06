@@ -26,8 +26,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Table(name="Course")//By Default It is already set Course And Optional
 @NamedQueries(value= {
 		@NamedQuery(name="query_get_all_course", query="SELECT c FROM Course c"),
-		@NamedQuery(name="query_get_100_Step_courses",
-		query="SELECT c FROM Course c WHERE name LIKE '%100 Steps'")
+		@NamedQuery(name="query_get_100_Step_courses", query="SELECT c FROM Course c WHERE name LIKE '%100 Steps'")
 })
 public class Course implements Serializable {
 
