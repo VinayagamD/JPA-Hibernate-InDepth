@@ -1,6 +1,9 @@
 package com.vinay.jpa.hibernate.repositories;
 
+import java.util.List;
+
 import com.vinay.jpa.hibernate.entity.Course;
+import com.vinay.jpa.hibernate.entity.Review;
 /**
  * Repository API for accessing course
  * @author Dell
@@ -29,4 +32,8 @@ public interface CourseRepository {
 	void deleteById(Long id);
 	
 	void playWithEntityManager();
+	
+	void addHardCodedReviewsForCourse();
+
+	void addReviewsForCourse(Long courseId, List<Review> reviews);
 }

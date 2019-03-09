@@ -1,6 +1,9 @@
 package com.vinay.jpa.hibernate;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.vinay.jpa.hibernate.entity.Course;
+import com.vinay.jpa.hibernate.entity.Review;
+import com.vinay.jpa.hibernate.entity.Student;
 import com.vinay.jpa.hibernate.repositories.CourseRepository;
 import com.vinay.jpa.hibernate.repositories.StudentRepository;
 
@@ -35,7 +40,18 @@ public class JpaHibernateApplication implements CommandLineRunner{
 		 * repository.save(new Course("Microservices in 100 steps"));
 		 */
 //		courseRepository.playWithEntityManager();
-		studentRepository.saveStudentWithPassport();
+//		studentRepository.saveStudentWithPassport();
+//		courseRepository.addHardCodedReviewsForCourse();
+		/*
+		 * List<Review> reviews = new ArrayList<>(); Review review1= new Review("5",
+		 * "Great Hands-on Stuff."); Review review2= new Review("5", "Hatsoff");
+		 * reviews.add(review1); reviews.add(review2);
+		 * courseRepository.addReviewsForCourse(10003L,reviews);
+		 */
+//		studentRepository.insertStudentAndCourse();
+//		studentRepository.insertHardCodedStudentAndCourse();
+		studentRepository.insertStudentAndCourse(new Student("Jack"), new Course("Microservices in 100 Steps"));
+		
 	}
 	
 

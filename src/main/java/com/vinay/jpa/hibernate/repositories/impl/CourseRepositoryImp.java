@@ -3,6 +3,8 @@
  */
 package com.vinay.jpa.hibernate.repositories.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.vinay.jpa.hibernate.entity.Course;
+import com.vinay.jpa.hibernate.entity.Review;
 import com.vinay.jpa.hibernate.repositories.CourseRepository;
 
 /**
@@ -121,4 +124,44 @@ public class CourseRepositoryImp implements CourseRepository {
 		course2.setName("JPA in 50 Steps - Updated");
 		
 	}
+
+	@Override
+	public void addHardCodedReviewsForCourse() {
+		// get the course 10003
+		Course course = findById(10003L);
+		logger.info("course.getReviews() -> {} ",course.getReviews());
+		
+		// add 2 Reviews to it
+		Review review1 = new Review("5", "Great Hands-on Stuff");
+		Review review2 = new Review("5", "Hatsoff");
+		
+		// Setting the relationship
+		course.addReview(review1);
+		course.addReview(review2);
+		review1.setCourse(course);
+		review2.setCourse(course);
+		// save it to the database
+		em.persist(review1);
+		em.persist(review2);
+		
+	}
+	
+	@Override
+	public void addReviewsForCourse(Long courseId, List<Review> reviews) {
+		// get the course 10003
+		Course course = findById(courseId);
+		logger.info("course.getReviews() -> {}",course.getReviews());
+		/*
+		 * for (Review review : reviews) { course.addReview(review);
+		 * review.setCourse(course); em.persist(review); }
+		 */
+		reviews.forEach((review)->{
+			course.addReview(review);
+			review.setCourse(course);
+			em.persist(review);
+		});
+		
+	}
+	
+	
 }

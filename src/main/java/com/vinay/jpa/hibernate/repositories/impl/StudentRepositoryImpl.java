@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.vinay.jpa.hibernate.entity.Course;
 import com.vinay.jpa.hibernate.entity.Passport;
 import com.vinay.jpa.hibernate.entity.Student;
 import com.vinay.jpa.hibernate.repositories.StudentRepository;
@@ -63,6 +64,31 @@ public class StudentRepositoryImpl implements StudentRepository {
 		// Persistence Context(student++,passport++)
 		
 	}
+
+	@Override
+	public void insertStudentAndCourse(Student student,Course course) {
+		/*
+		 * Student student = new Student("Jack"); Course course = new
+		 * Course("Micorservices in 100 Steps");
+		 */
+		em.persist(student);
+		em.persist(course);
+		student.addCourse(course);
+		course.addStudent(student);
+	}
+
+	@Override
+	public void insertHardCodedStudentAndCourse() {
+		Student student = new Student("Jack");
+		Course course = new Course("Micorservices in 100 Steps");
+		em.persist(student);
+		em.persist(course);
+		student.addCourse(course);
+		course.addStudent(student);
+		em.persist(student);
+		
+	}
+	
 	
 	
 	

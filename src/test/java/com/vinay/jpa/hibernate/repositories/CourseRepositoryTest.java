@@ -2,6 +2,8 @@ package com.vinay.jpa.hibernate.repositories;
 
 import static org.junit.Assert.*;
 
+import javax.persistence.EntityManager;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -13,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.vinay.jpa.hibernate.JpaHibernateApplication;
 import com.vinay.jpa.hibernate.entity.Course;
+import com.vinay.jpa.hibernate.entity.Review;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=JpaHibernateApplication.class)
@@ -22,6 +25,9 @@ public class CourseRepositoryTest {
 	
 	@Autowired
 	private CourseRepository repository;
+	
+	@Autowired
+	private EntityManager em;
 	
 	@Test
 	public void contextLoads() {
@@ -79,6 +85,18 @@ public class CourseRepositoryTest {
 	@DirtiesContext
 	public void playWithEntityManager() {
 		repository.playWithEntityManager();
+	}
+	
+	@Test
+	public void retrieveReviewsForCourse() {
+		Course course = repository.findById(10003l);
+		logger.info("{}",course.getReviews());
+	}
+	
+	@Test
+	public void retrieveCourseForReview() {
+		Review review = em.find(Review.class, 50001l);
+		logger.info("{}", review.getCourse());
 	}
 	
 
