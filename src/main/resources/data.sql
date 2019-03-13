@@ -4,7 +4,12 @@ insert into
 	values
 		(10001, 'JPA in 50 steps', sysdate(),  sysdate()),
 		(10002, 'Spring in 50 Steps', sysdate(),  sysdate()),
-		(10003, 'Spring Boot in 100 Steps',sysdate(),  sysdate());
+		(10003, 'Spring Boot in 100 Steps',sysdate(),  sysdate()),
+		(10004, 'Dummy1',sysdate(),  sysdate()),
+		(10005, 'Dummy2',sysdate(),  sysdate()),
+		(10006, 'Dummy3',sysdate(),  sysdate()),
+		(10007, 'Dummy4',sysdate(),  sysdate()),
+		(10008, 'Dummy5',sysdate(),  sysdate());
 		
 insert into
 	passport

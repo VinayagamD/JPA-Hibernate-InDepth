@@ -21,6 +21,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author Dell
  *
@@ -49,6 +51,7 @@ public class Course implements Serializable {
 	private List<Review> reviews = new ArrayList<>();
 	
 	@ManyToMany(mappedBy = "courses")
+	@JsonIgnore
 	private List<Student> students = new ArrayList<>();
 	
 	@UpdateTimestamp
