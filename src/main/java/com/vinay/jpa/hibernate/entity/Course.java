@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +19,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -34,6 +37,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 		@NamedQuery(name="query_get_all_course", query="SELECT c FROM Course c"),
 		@NamedQuery(name="query_get_100_Step_courses", query="SELECT c FROM Course c WHERE name LIKE '%100 Steps'")
 })
+@Cacheable
 public class Course implements Serializable {
 
 	private static final long serialVersionUID = 3935672323783205459L;

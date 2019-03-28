@@ -3,6 +3,7 @@ package com.vinay.jpa.hibernate.repositories;
 import static org.junit.Assert.*;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,6 +41,19 @@ public class CourseRepositoryTest {
 		Course course = repository.findById(10001l);
 		assertNotNull(course);
 		assertEquals("JPA in 50 steps", course.getName());
+	}
+	
+	@Test
+	@Transactional // This annotation ensures first level caches 
+				// since query is same multiple query is avoided for same query twice 
+	public void findById_firstLevelCacheDemo(){
+		Course course = repository.findById(10001l);
+		logger.info("First Course Retrieved {} ",course);
+		
+		Course course1 = repository.findById(10001l);
+		logger.info("First Course Retrieved again {} ",course1);
+		assertEquals("JPA in 50 steps", course.getName());
+		assertEquals("JPA in 50 steps", course1.getName());
 	}
 	
 	@Test

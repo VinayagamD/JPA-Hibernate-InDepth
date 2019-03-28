@@ -72,7 +72,37 @@
 	<scope>test</scope>
 </dependency>
 ```
+#### Second Level Caching Dependency
 
+```
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-ehcache</artifactId>
+    <version>5.4.2.Final</version>
+</dependency>
+```
+
+#### Second Level Caching Properties
+
+```
+# Second Level Cache - Ehcache
+
+#1. enable second level cache
+spring.jpa.properties.hibernate.cache.use_second_level_cache=true
+#2. specify the caching framewor - Ehcache
+spring.jpa.properties.hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.internal.EhcacheRegionFactory
+#3. Only cache what I tell to cache
+spring.jpa.properties.javax.persistence.sharedCache.mode=ENABLE_SELECTIVE
+#4. What data to cache?
+logging.level.net.sf.ehcache=debug
+```
+
+#### Annontation
+**_Note :ENABLE_SELECTIVE as mentioned in the above properties_**
+`By Default @Cachheable is true`
+```
+@Cacheable
+```
 ----------
 
 **Following Topics Have Been Coverd**
@@ -162,3 +192,7 @@
     * Page
   * Custom Queries
 * Spring Data Rest
+* Caching With Hibernate
+  * First Level Cache **(@Transactional)** _Enabled By Default_
+  * [Second Level Cache](https://mvnrepository.com/artifact/org.hibernate/hibernate-ehcache/5.4.2.Final)
+    * @Cacheable
