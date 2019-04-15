@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.vinay.jpa.hibernate.JpaHibernateApplication;
+import com.vinay.jpa.hibernate.entity.Address;
 import com.vinay.jpa.hibernate.entity.Passport;
 import com.vinay.jpa.hibernate.entity.Student;
 
@@ -80,6 +81,15 @@ public class StudentRepositoryTest {
 		Student student = em.find(Student.class, 20001L);
 		logger.info("student -> {} ",student);
 		logger.info("passport->{}",student.getPassport());
+	}
+	
+	@Test
+	@Transactional
+	public void setAddressDetails() {
+		Student student = em.find(Student.class, 20001L);
+		student.setAddress(new Address("No 101", "Some Street", "Bangalore"));
+		em.flush();
+		logger.info("student -> {} ",student);
 	}
 	
 	@Test

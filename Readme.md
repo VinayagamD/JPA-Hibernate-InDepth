@@ -89,7 +89,7 @@
 
 #1. enable second level cache
 spring.jpa.properties.hibernate.cache.use_second_level_cache=true
-#2. specify the caching framewor - Ehcache
+#2. specify the caching framework - Ehcache
 spring.jpa.properties.hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.internal.EhcacheRegionFactory
 #3. Only cache what I tell to cache
 spring.jpa.properties.javax.persistence.sharedCache.mode=ENABLE_SELECTIVE
@@ -104,6 +104,40 @@ logging.level.net.sf.ehcache=debug
 @Cacheable
 ```
 ----------
+
+#### Performance Tuning
+
+**N+1 Problem**
+
+* Entity Graph
+```java
+@Test
+@Transactional
+public void solvingNPlusOneProblem_EntityGraph() {
+	EntityGraph<Course> graph = em.createEntityGraph(Course.class);
+	Subgraph<Object> subgraph = graph.addSubgraph("students");
+	List<Course> courses = em.createNamedQuery("query_get_all_course", Course.class)
+	.setHint("javax.persistence.loadgraph", graph).getResultList();
+		
+	courses.forEach(course -> logger.info("Course -> {} Students -> {} ", course, course.getStudents()) );
+		 
+}
+```
+* FETCH JOIN Named Query
+
+```Java
+@NamedQuery(name="query_get_all_course_join_fetch", query="SELECT c FROM Course c JOIN FETCH c.students s")
+```
+
+```Java
+@Test
+@Transactional
+public void solvingNPlusOneProblem_JoinFetch() {
+	List<Course> courses = em.createNamedQuery("query_get_all_course_join_fetch", Course.class).getResultList();
+		
+	courses.forEach(course -> logger.info("Course -> {} Students -> {} ", course, course.getStudents()) );
+}
+```
 
 **Following Topics Have Been Coverd**
 
@@ -196,3 +230,14 @@ logging.level.net.sf.ehcache=debug
   * First Level Cache **(@Transactional)** _Enabled By Default_
   * [Second Level Cache](https://mvnrepository.com/artifact/org.hibernate/hibernate-ehcache/5.4.2.Final)
     * @Cacheable
+* Tips
+  * @SQLDelete
+  * @Where
+  * @PreRemove
+  * @Embeddable
+  * @Enumerable
+* Performance Tuning
+  * N+1 Problem
+    * createEntityGraph
+    * addSubgraph
+    * Join Fetch

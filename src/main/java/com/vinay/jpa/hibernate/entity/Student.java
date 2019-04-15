@@ -23,6 +23,8 @@ public class Student {
 	@Column(nullable=false)
 	private String name;
 	
+	private Address address;
+	
 	@OneToOne(fetch=FetchType.LAZY)
 	private Passport passport;
 	
@@ -92,6 +94,19 @@ public class Student {
 	public void removeCourse(Course course) {
 		this.courses.remove(course);
 	}
+
+	
+
+	public Address getAddress() {
+		return address;
+	}
+
+
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
 
 
 	@Override

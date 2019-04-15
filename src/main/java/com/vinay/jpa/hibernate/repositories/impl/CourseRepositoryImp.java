@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import com.vinay.jpa.hibernate.entity.Course;
 import com.vinay.jpa.hibernate.entity.Review;
+import com.vinay.jpa.hibernate.entity.ReviewRating;
 import com.vinay.jpa.hibernate.repositories.CourseRepository;
 
 /**
@@ -39,7 +40,9 @@ public class CourseRepositoryImp implements CourseRepository {
 	 */
 	@Override
 	public Course findById(Long id) {
-		return em.find(Course.class, id);
+		Course course = em.find(Course.class, id);
+		logger.info("Course -> {} ",course);
+		return course;
 	}
 
 	/**
@@ -132,8 +135,8 @@ public class CourseRepositoryImp implements CourseRepository {
 		logger.info("course.getReviews() -> {} ",course.getReviews());
 		
 		// add 2 Reviews to it
-		Review review1 = new Review("5", "Great Hands-on Stuff");
-		Review review2 = new Review("5", "Hatsoff");
+		Review review1 = new Review(ReviewRating.FIVE, "Great Hands-on Stuff");
+		Review review2 = new Review(ReviewRating.FIVE, "Hatsoff");
 		
 		// Setting the relationship
 		course.addReview(review1);

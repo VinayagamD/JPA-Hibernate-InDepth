@@ -1,15 +1,15 @@
 insert into 
 	course
-		(id, name, created_date, last_updated_date) 
+		(id, name, created_date, last_updated_date,is_deleted) 
 	values
-		(10001, 'JPA in 50 steps', sysdate(),  sysdate()),
-		(10002, 'Spring in 50 Steps', sysdate(),  sysdate()),
-		(10003, 'Spring Boot in 100 Steps',sysdate(),  sysdate()),
-		(10004, 'Dummy1',sysdate(),  sysdate()),
-		(10005, 'Dummy2',sysdate(),  sysdate()),
-		(10006, 'Dummy3',sysdate(),  sysdate()),
-		(10007, 'Dummy4',sysdate(),  sysdate()),
-		(10008, 'Dummy5',sysdate(),  sysdate());
+		(10001, 'JPA in 50 steps', sysdate(),  sysdate(),false),
+		(10002, 'Spring in 50 Steps', sysdate(),  sysdate(),false),
+		(10003, 'Spring Boot in 100 Steps',sysdate(),  sysdate(),false);
+--		(10004, 'Dummy1',sysdate(),  sysdate(),false),
+--		(10005, 'Dummy2',sysdate(),  sysdate(),false),
+--		(10006, 'Dummy3',sysdate(),  sysdate(),false),
+--		(10007, 'Dummy4',sysdate(),  sysdate(),false),
+--		(10008, 'Dummy5',sysdate(),  sysdate(),false);
 		
 insert into
 	passport
@@ -31,9 +31,9 @@ insert into
 	review
 		(id, rating, description, course_id)
 	values
-		(50001, '5','Great Course',10001),
-		(50002, '4','Wonderful Course',10001),
-		(50003, '5','Awesome course Course',10003);
+		(50001, 'FIVE','Great Course',10001),
+		(50002, 'FOUR','Wonderful Course',10001),
+		(50003, 'FIVE','Awesome course Course',10003);
 		
 insert into
 	student_course
